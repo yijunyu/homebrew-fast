@@ -1,11 +1,7 @@
-# Documentation: http://docs.brew.sh/Formula-Cookbook.html
-#                http://www.rubydoc.info/github/Homebrew/brew/master/Formula
-# PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
-
 class Srcml < Formula
   desc "srcML - an infrastructure for the exploration, analysis, and manipulation of source code"
   homepage "http://www.srcml.org/"
-  url "http://131.123.42.38/lmcrs/beta/srcML-src.tar.gz"
+  url "https://github.com/yijunyu/homebrew-fast/raw/master/src/srcml-0.9.5.tar.gz"
   version "0.9.5"
   sha256 "55dd2115548e270724af4251187343656d2dfda0e7d372fee15ae27262e3fa8e"
 
