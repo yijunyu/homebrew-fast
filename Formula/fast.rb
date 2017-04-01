@@ -56,15 +56,14 @@ public class Hello {
     EOS
 
     pid = fork do
-	    exec "#{bin}/srcml", "Hello.java", "-o", "Hello.xml"
-	    exec "#{bin}/fast", "Hello.xml", "Hello.fbs"
-	    exec "#{bin}/fast", "Hello.fbs", "Hello-fbs.xml"
-	    exec "#{bin}/fast", "Hello.xml", "Hello.pb"
-	    exec "#{bin}/fast", "Hello.pb", "Hello-pb.xml"
-	    exec "diff", "Hello.xml", "Hello-result.xml"
-	    exec "diff", "Hello-fbs.xml", "Hello-fbs-result.xml"
-	    exec "diff", "Hello-pb.xml", "Hello-pb-result.xml"
+        exec "#{bin}/srcml", "Hello.java", "-o", "Hello.xml"
+        exec "#{bin}/fast", "Hello.xml", "Hello.fbs"
+        exec "#{bin}/fast", "Hello.fbs", "Hello-fbs.xml"
+        exec "#{bin}/fast", "Hello.xml", "Hello.pb"
+        exec "#{bin}/fast", "Hello.pb", "Hello-pb.xml"
+        exec "diff", "Hello.xml", "Hello-result.xml"
+        exec "diff", "Hello-fbs.xml", "Hello-fbs-result.xml"
+        exec "diff", "Hello-pb.xml", "Hello-pb-result.xml"
     end
-
   end
 end
