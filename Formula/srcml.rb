@@ -7,7 +7,7 @@ class Srcml < Formula
 
   depends_on "cmake" => :build
   depends_on "LibArchive" => :build
-  depends_on "antlr2" => :build
+  depends_on "antlr@2" => :build
   depends_on "libantlr3c" => :build
   depends_on "Boost" => :build
   depends_on "libxml2"
@@ -61,10 +61,10 @@ int f(int x) {
     EOS
 
     pid = fork do
-	    exec "#{bin}/srcml", "example.c", "-o", "example.xml"
-	    exec "#{bin}/srcml", "Hello.java", "-o", "Hello.xml"
-	    exec "diff", "Hello.xml", "Hello-result.xml"
-	    exec "diff", "example.xml", "example-result.xml"
+        exec "#{bin}/srcml", "example.c", "-o", "example.xml"
+        exec "#{bin}/srcml", "Hello.java", "-o", "Hello.xml"
+        exec "diff", "Hello.xml", "Hello-result.xml"
+        exec "diff", "example.xml", "example-result.xml"
     end
   end
 end
