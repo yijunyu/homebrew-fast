@@ -2,7 +2,6 @@ class Fast < Formula
   desc "Flattening Abstract Syntax Trees"
   homepage "https://github.com/yijunyu/fast"
   url "https://github.com/yijunyu/fast/archive/v0.0.1.tar.gz"
-  version "0.0.1"
   sha256 "844467051325cee43ba98b52e9512133ec53388153b32339190509b82570a4e9"
 
   depends_on "cmake" => :build
@@ -55,15 +54,15 @@ public class Hello {
 }</block></class></unit>
     EOS
 
-    pid = fork do
-        exec "#{bin}/srcml", "Hello.java", "-o", "Hello.xml"
-        exec "#{bin}/fast", "Hello.xml", "Hello.fbs"
-        exec "#{bin}/fast", "Hello.fbs", "Hello-fbs.xml"
-        exec "#{bin}/fast", "Hello.xml", "Hello.pb"
-        exec "#{bin}/fast", "Hello.pb", "Hello-pb.xml"
-        exec "diff", "Hello.xml", "Hello-result.xml"
-        exec "diff", "Hello-fbs.xml", "Hello-fbs-result.xml"
-        exec "diff", "Hello-pb.xml", "Hello-pb-result.xml"
+    fork do
+      exec "#{bin}/srcml", "Hello.java", "-o", "Hello.xml"
+      exec "#{bin}/fast", "Hello.xml", "Hello.fbs"
+      exec "#{bin}/fast", "Hello.fbs", "Hello-fbs.xml"
+      exec "#{bin}/fast", "Hello.xml", "Hello.pb"
+      exec "#{bin}/fast", "Hello.pb", "Hello-pb.xml"
+      exec "diff", "Hello.xml", "Hello-result.xml"
+      exec "diff", "Hello-fbs.xml", "Hello-fbs-result.xml"
+      exec "diff", "Hello-pb.xml", "Hello-pb-result.xml"
     end
   end
 end
