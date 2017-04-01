@@ -1,5 +1,5 @@
 class Srcml < Formula
-  desc "srcML - convert source code to XML"
+  desc "convert source code to XML"
   homepage "http://www.srcml.org/"
   url "https://github.com/yijunyu/homebrew-fast/raw/master/src/srcml-0.9.5.tar.gz"
   sha256 "55dd2115548e270724af4251187343656d2dfda0e7d372fee15ae27262e3fa8e"
@@ -19,7 +19,6 @@ class Srcml < Formula
   patch :DATA
 
   test do
-
     (testpath/"Hello.java").write <<-EOS
 
 public class Hello {
