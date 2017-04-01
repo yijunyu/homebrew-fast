@@ -20,7 +20,31 @@ class Srcml < Formula
   patch :DATA 
 
   test do
-    system "true"
+    javafile = testpath/"Hello.java"
+    ccfile = testpath/"example.cc"
+    java_xmlfile = testpath/"Hello-result.xml"
+    cc_xmlfile = testpath/"example-result.xml"
+
+    (testpath/"Hello.java").write <<-EOS
+
+public class Hello {
+	public static void main(String args[]) {
+		System.out.println("Hello, world!");
+	}
+}
+    EOS
+
+    (testpath/"example.cc").write <<-EOS
+int f(int x) {
+	  int result = (x / 42);
+	    return result;
+}
+    EOS
+
+    pid = fork do
+	    exec "#{bin}/srcml", "example.c", "-o", "example.xml"
+	    exec "#{bin}/srcml", "Hello.java", "-o", "Hello.xml"
+    end
   end
 end
 __END__
