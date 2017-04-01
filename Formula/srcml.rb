@@ -12,17 +12,13 @@ class Srcml < Formula
   depends_on "libxml2"
 
   def install
-   system "cmake", "-G", "Unix Makefiles", "-DCMAKE_C_FLAGS_RELEASE=-DNDEBUG", "-DCMAKE_CXX_FLAGS_RELEASE=-DNDEBUG", "-DCMAKE_INSTALL_PREFIX=#{prefix}", "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_FIND_FRAMEWORK=LAST", "-DCMAKE_VERBOSE_MAKEFILE=ON", "-Wno-dev"
-   system "make", "install"
+    system "cmake", "-G", "Unix Makefiles", "-DCMAKE_C_FLAGS_RELEASE=-DNDEBUG", "-DCMAKE_CXX_FLAGS_RELEASE=-DNDEBUG", "-DCMAKE_INSTALL_PREFIX=#{prefix}", "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_FIND_FRAMEWORK=LAST", "-DCMAKE_VERBOSE_MAKEFILE=ON", "-Wno-dev"
+    system "make", "install"
   end
 
-  patch :DATA 
+  patch :DATA
 
   test do
-    javafile = testpath/"Hello.java"
-    ccfile = testpath/"example.cc"
-    java_xmlfile = testpath/"Hello-result.xml"
-    cc_xmlfile = testpath/"example-result.xml"
 
     (testpath/"Hello.java").write <<-EOS
 
@@ -32,7 +28,7 @@ public class Hello {
     }
 }
     EOS
-    
+
     (testpath/"example.cc").write <<-EOS
 int f(int x) {
       int result = (x / 42);
