@@ -1,5 +1,5 @@
 class Srcml < Formula
-  desc "srcML - an infrastructure for the exploration, analysis, and manipulation of source code"
+  desc "srcML - convert source code to XML"
   homepage "http://www.srcml.org/"
   url "https://github.com/yijunyu/homebrew-fast/raw/master/src/srcml-0.9.5.tar.gz"
   version "0.9.5"
