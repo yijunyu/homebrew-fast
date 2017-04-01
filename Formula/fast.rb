@@ -9,7 +9,7 @@ class Fast < Formula
   depends_on "flatbuffers" => :build
   depends_on "pkg-config" => :build
   depends_on "protobuf" => :build
-  depends_on "srcml" => :optional
+  depends_on "srcml"
 
   def install
     system "cmake", "-G", "Unix Makefiles", *std_cmake_args
