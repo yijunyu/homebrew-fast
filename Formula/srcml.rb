@@ -33,7 +33,7 @@ public class Hello {
 	}
 }
     EOS
-
+    
     (testpath/"example.cc").write <<-EOS
 int f(int x) {
 	  int result = (x / 42);
@@ -41,9 +41,30 @@ int f(int x) {
 }
     EOS
 
+    (testpath/"Hello-result.xml").write <<-EOS
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="0.9.5" language="Java" filename="Hello.java">
+<class><specifier>public</specifier> class <name>Hello</name> <block>{
+	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name><name>args</name><index>[]</index></name></decl></parameter>)</parameter_list> <block>{
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Hello, world!"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></function>
+}</block></class>
+</unit>
+    EOS
+
+    (testpath/"example-result.xml").write <<-EOS
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="0.9.5" language="C++" filename="example.cc"><function><type><name>int</name></type> <name>f</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{
+	  <decl_stmt><decl><type><name>int</name></type> <name>result</name> <init>= <expr><operator>(</operator><name>x</name> <operator>/</operator> <literal type="number">42</literal><operator>)</operator></expr></init></decl>;</decl_stmt>
+	    <return>return <expr><name>result</name></expr>;</return>
+}</block></function></unit>
+    EOS
+
     pid = fork do
 	    exec "#{bin}/srcml", "example.c", "-o", "example.xml"
 	    exec "#{bin}/srcml", "Hello.java", "-o", "Hello.xml"
+	    exec "diff", "Hello.xml", "Hello-result.xml"
+	    exec "diff", "example.xml", "example-result.xml"
     end
   end
 end
