@@ -17,6 +17,54 @@ class Fast < Formula
   end
 
   test do
-    system "true"
+    (testpath/"Hello.java").write <<-EOS
+
+public class Hello {
+	public static void main(String args[]) {
+		System.out.println("Hello, world!");
+	}
+}
+    EOS
+
+    (testpath/"Hello-result.xml").write <<-EOS
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="0.9.5" language="Java" filename="Hello.java">
+<class><specifier>public</specifier> class <name>Hello</name> <block>{
+	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name><name>args</name><index>[]</index></name></decl></parameter>)</parameter_list> <block>{
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Hello, world!"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></function>
+}</block></class>
+</unit>
+    EOS
+
+    (testpath/"Hello-fbs-result.xml").write <<-EOS
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:java="http://www.srcML.org/srcML/java" revision="0.9.5" language="JAVA" filename="Hello.java"><class><specifier>public</specifier> class <name>Hello</name><block>{
+	<function><specifier>public</specifier><specifier>static</specifier><type><name>void</name></type><name>main</name><parameter_list>(<parameter><decl><type><name>String</name></type><name><name>args</name><index>[]</index></name></decl></parameter>)</parameter_list><block>{
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal>"Hello, world!"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></function>
+}</block></class></unit>
+    EOS
+
+    (testpath/"Hello-pb-result.xml").write <<-EOS
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:="http://www.srcML.org/srcML/" revision="0.9.5" language="" filename="Hello.java"><class><specifier>public</specifier> class <name>Hello</name><block>{
+	<function><specifier>public</specifier><specifier>static</specifier><type><name>void</name></type><name>main</name><parameter_list>(<parameter><decl><type><name>String</name></type><name><name>args</name><index>[]</index></name></decl></parameter>)</parameter_list><block>{
+		<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="">"Hello, world!"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></function>
+}</block></class></unit>
+    EOS
+
+    pid = fork do
+	    exec "#{bin}/srcml", "Hello.java", "-o", "Hello.xml"
+	    exec "#{bin}/fast", "Hello.xml", "Hello.fbs"
+	    exec "#{bin}/fast", "Hello.fbs", "Hello-fbs.xml"
+	    exec "#{bin}/fast", "Hello.xml", "Hello.pb"
+	    exec "#{bin}/fast", "Hello.pb", "Hello-pb.xml"
+	    exec "diff", "Hello.xml", "Hello-result.xml"
+	    exec "diff", "Hello-fbs.xml", "Hello-fbs-result.xml"
+	    exec "diff", "Hello-pb.xml", "Hello-pb-result.xml"
+    end
+
   end
 end
