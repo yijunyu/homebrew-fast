@@ -1,18 +1,19 @@
 class Srcml < Formula
   desc "convert source code to XML"
   homepage "http://www.srcml.org/"
-  url "https://github.com/yijunyu/homebrew-fast/raw/master/src/srcml-0.9.5.tar.gz"
+  url "http://sead1.open.ac.uk/srcml/srcml-0.9.5.tar.bz"
+  version "0.9.5"
   sha256 "55dd2115548e270724af4251187343656d2dfda0e7d372fee15ae27262e3fa8e"
 
   depends_on "cmake" => :build
   depends_on "LibArchive" => :build
   depends_on "antlr@2" => :build
   depends_on "libantlr3c" => :build
-  depends_on "Boost" => :build
+  depends_on "Boost"
   depends_on "libxml2"
 
   def install
-    system "cmake", "-G", "Unix Makefiles", "-DCMAKE_C_FLAGS_RELEASE=-DNDEBUG", "-DCMAKE_CXX_FLAGS_RELEASE=-DNDEBUG", "-DCMAKE_INSTALL_PREFIX=#{prefix}", "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_FIND_FRAMEWORK=LAST", "-DCMAKE_VERBOSE_MAKEFILE=ON", "-Wno-dev"
+    system "cmake", ".", *std_cmake_args
     system "make", "install"
   end
 
@@ -20,45 +21,17 @@ class Srcml < Formula
 
   test do
     (testpath/"Hello.java").write <<-EOS
-
-public class Hello {
-    public static void main(String args[]) {
-        System.out.println("Hello, world!");
-    }
-}
+int
     EOS
-
-    (testpath/"example.cc").write <<-EOS
-int f(int x) {
-      int result = (x / 42);
-        return result;
-}
-    EOS
-
     (testpath/"Hello-result.xml").write <<-EOS
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<unit xmlns="http://www.srcML.org/srcML/src" revision="0.9.5" language="Java" filename="Hello.java">
-<class><specifier>public</specifier> class <name>Hello</name> <block>{
-    <function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name><name>args</name><index>[]</index></name></decl></parameter>)</parameter_list> <block>{
-        <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"Hello, world!"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
-    }</block></function>
-}</block></class>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="0.9.5" language="Java" filename="Hello.java"><expr_stmt><expr><name>int</name></expr></expr_stmt>
 </unit>
     EOS
 
-    (testpath/"example-result.xml").write <<-EOS
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="0.9.5" language="C++" filename="example.cc"><function><type><name>int</name></type> <name>f</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{
-      <decl_stmt><decl><type><name>int</name></type> <name>result</name> <init>= <expr><operator>(</operator><name>x</name> <operator>/</operator> <literal type="number">42</literal><operator>)</operator></expr></init></decl>;</decl_stmt>
-        <return>return <expr><name>result</name></expr>;</return>
-}</block></function></unit>
-    EOS
-
-    fork do
-      exec "#{bin}/srcml", "example.c", "-o", "example.xml"
+    do
       exec "#{bin}/srcml", "Hello.java", "-o", "Hello.xml"
       exec "diff", "Hello.xml", "Hello-result.xml"
-      exec "diff", "example.xml", "example-result.xml"
     end
   end
 end

@@ -2,7 +2,7 @@ class Fast < Formula
   desc "Flattening Abstract Syntax Trees"
   homepage "https://github.com/yijunyu/fast"
   url "https://github.com/yijunyu/fast/archive/v0.0.1.tar.gz"
-  sha256 "08d5bae44ca5105823c7d752809bc92f74b60e5963ffd8348f9f411ebd7af17a"
+  sha256 "0a0bfdca3bf91e54795e1a75267f7e16b2499398225f0cdf238b33d54b974215"
 
   depends_on "cmake" => :build
   depends_on "flatbuffers" => :build
