@@ -33,7 +33,6 @@ int
       exec "#{bin}/srcml", "Hello.java", "-o", "Hello.xml"
       exec "diff", "Hello.xml", "Hello-result.xml"
     end
-  end
 end
 __END__
 diff -r -u a/CMake/config.cmake b/CMake/config.cmake
