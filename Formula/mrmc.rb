@@ -8,6 +8,7 @@ class Mrmc < Formula
 
   def install
     system "make", "all"
+    system "make", "install"
   end
 
   test do
