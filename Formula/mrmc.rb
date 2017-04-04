@@ -23,7 +23,7 @@ diff -r -u a/mrmc_src_v1.5/makefile b/mrmc_src_v1.5/makefile
  	$(MAKE) -C obj $@
  
 +DESTDIR=
-+prefix=/usr/local
++prefix=/usr/local/Cellar/mrmc/1.5
 +
 +install: 
 +	mkdir -p $(DESTDIR)$(prefix)/bin
