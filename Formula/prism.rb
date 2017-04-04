@@ -1,39 +1,37 @@
-class Prism < Formula
-  desc "Probabilistic Model Checker"
-  homepage "http://www.mrmc-tool.org/"
-  url "https://github.com/yijunyu/homebrew-fast/raw/master/src/prism-4.3.1.tar.gz"
-  sha256 "6af7cfc37605bf48421a0c436e8006d25df23a6660f14a9c360d830da1bd9a94"
+require 'formula'
 
-  def install
-    system "make"
-    system "make", "install"
-  end
-
-  patch :DATA
-
-  test do
-    system bin/"prism", "-v"
+class PrismDownloadStrategy < CurlDownloadStrategy
+  def _fetch
+    if not File.exists? "#{HOMEBREW_CACHE}/prism-4.3.1-src.tar.gz"
+      onoe <<-EOS.undent
+      Please download the source code of version 4.3.1 from the webpage of
+      PRISM (http://www.prismmodelchecker.org/download.php), rename the
+      downloaded file to prism-4.3.1.tar.gz, and move the file to
+      #{HOMEBREW_CACHE}.
+      EOS
+    end
   end
 end
-__END__
-diff -r -u a/Makefile b/Makefile
---- a/Makefile	2016-08-10 18:23:18.000000000 +0100
-+++ b/Makefile	2017-04-04 18:28:34.000000000 +0100
-@@ -2,10 +2,16 @@
- #  Small makefile for building PRISM source distributions  #
- ############################################################
- 
-+prefix=${HOMEBREW_FORMULA_PREFIX}
-+
- default: none
- 
- none:
--	@echo 'Did you want to build PRISM? Do "cd prism" and then "make"'
-+	cd prism; make
-+
-+install:
-+	mkdir -p $(prefix)/bin
-+	install -m 0755 bin/prism $(prefix)/bin/prism
- 
- # By default, extract version number from Java code using printversion
- # Can be overridden by passing VERSION=xxx
+
+class Prism < Formula
+  homepage 'http://www.prismmodelchecker.org'
+  url 'prism-4.3.1-src.tar.gz', :using => PrismDownloadStrategy
+  version '4.3.1'
+  sha256 'c2305b546ddc6619131f0aa9224c64d0f1ada04cebb07b25d1a7ea1aa82f12e8'
+
+  def install
+    system "make clean_all"
+    system "make OSTYPE=darwin cuddpackage"
+    system "make OSTYPE=darwin extpackages"
+    system "make OSTYPE=darwin all"
+    (share/'prism').install "bin", "classes", "doc", "etc", "examples",
+                            "images", "install.sh", "lib"
+    Dir.chdir "#{share}/prism" do
+      system "./install.sh"
+    end
+    mkdir "#{bin}"
+    ln_s "#{share}/prism/bin/prism", "#{bin}/prism"
+    ln_s "#{share}/prism/bin/xprism", "#{bin}/xprism"
+    ohai "The PRISM package is installed in #{HOMEBREW_PREFIX}/share/prism."
+  end
+end
