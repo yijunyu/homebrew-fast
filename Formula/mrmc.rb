@@ -14,7 +14,7 @@ class Gsl < Formula
     system bin/"mrmc", "-h"
   end
 end
-_END
+__END__
 diff -r -u a/mrmc_src_v1.5/makefile b/mrmc_src_v1.5/makefile
 --- a/mrmc_src_v1.5/makefile	2011-01-12 11:59:28.000000000 +0000
 +++ b/mrmc_src_v1.5/makefile	2017-04-04 17:01:48.000000000 +0100
