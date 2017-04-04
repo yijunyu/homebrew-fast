@@ -11,6 +11,8 @@ class Mrmc < Formula
     system "make", "install"
   end
 
+  patch :DATA
+
   test do
     system bin/"mrmc", "-h"
   end
@@ -18,18 +20,17 @@ end
 __END__
 diff -r -u a/mrmc_src_v1.5/makefile b/mrmc_src_v1.5/makefile
 --- a/mrmc_src_v1.5/makefile	2011-01-12 11:59:28.000000000 +0000
-+++ b/mrmc_src_v1.5/makefile	2017-04-04 17:01:48.000000000 +0100
-@@ -73,6 +73,14 @@
++++ b/mrmc_src_v1.5/makefile	2017-04-04 17:40:43.000000000 +0100
+@@ -73,6 +73,13 @@
  all: bin lib
  	$(MAKE) -C obj $@
  
-+DESTDIR=
-+prefix=/usr/local/Cellar/mrmc/1.5
++prefix=${HOMEBREW_FORMULA_PREFIX}
 +
 +install: 
-+	mkdir -p $(DESTDIR)$(prefix)/bin
-+	install -m 0755 bin/mrmc $(DESTDIR)$(prefix)/bin/mrmc
-+	install -m 0755 lib/mrmc.a $(DESTDIR)$(prefix)/lib/mrmc.a
++	mkdir -p $(prefix)/bin
++	install -m 0755 bin/mrmc $(prefix)/bin/mrmc
++	install -m 0755 lib/mrmc.a $(prefix)/lib/mrmc.a
 +
  lint:
  	$(MAKE) -C obj $@
