@@ -2,7 +2,7 @@ class Gsl < Formula
   desc "Markov Reward Model Checker"
   homepage "http://www.mrmc-tool.org/"
   url "https://github.com/yijunyu/homebrew-fast/raw/master/src/mrmc-1.5.tar.gz"
-  sha256 ""
+  sha256 "b523ad316252e91e24f3dbecfe5a8124832e1b1881610bc1f7c33d5929274466"
 
   depends_on "gsl"
 
