@@ -1,4 +1,4 @@
-class Gsl < Formula
+class Mrmc < Formula
   desc "Markov Reward Model Checker"
   homepage "http://www.mrmc-tool.org/"
   url "https://github.com/yijunyu/homebrew-fast/raw/master/src/mrmc-1.5.tar.gz"
