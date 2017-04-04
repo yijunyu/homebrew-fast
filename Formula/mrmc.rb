@@ -20,8 +20,8 @@ end
 __END__
 diff -r -u a/mrmc_src_v1.5/makefile b/mrmc_src_v1.5/makefile
 --- a/mrmc_src_v1.5/makefile	2011-01-12 11:59:28.000000000 +0000
-+++ b/mrmc_src_v1.5/makefile	2017-04-04 17:40:43.000000000 +0100
-@@ -73,6 +73,13 @@
++++ b/mrmc_src_v1.5/makefile	2017-04-04 17:56:10.000000000 +0100
+@@ -73,6 +73,14 @@
  all: bin lib
  	$(MAKE) -C obj $@
  
@@ -29,6 +29,7 @@ diff -r -u a/mrmc_src_v1.5/makefile b/mrmc_src_v1.5/makefile
 +
 +install: 
 +	mkdir -p $(prefix)/bin
++	mkdir -p $(prefix)/lib
 +	install -m 0755 bin/mrmc $(prefix)/bin/mrmc
 +	install -m 0755 lib/mrmc.a $(prefix)/lib/mrmc.a
 +
