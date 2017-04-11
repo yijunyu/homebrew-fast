@@ -6,9 +6,10 @@ class Srcml < Formula
   sha256 "55dd2115548e270724af4251187343656d2dfda0e7d372fee15ae27262e3fa8e"
 
   bottle do
+    root_url "http://sead1.open.ac.uk/srcml"
     cellar :any
     rebuild 1
-    sha256 "58b8d78cae97ab8151491f11c12d2a3ccb5c3bb5da9348f645bf85056a940827" => :sierra
+    sha256 "4ccf28e8a31f43dc80d0eb0b9947db18215803804b590506fd52403f1bc28f9d" => :sierra
   end
 
   depends_on "cmake" => :build
