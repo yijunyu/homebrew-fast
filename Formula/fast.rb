@@ -7,7 +7,7 @@ class Fast < Formula
   bottle do
     root_url "https://github.com/yijunyu/fast/releases/download/v0.0.1"
     cellar :any
-    sha256 "398c812895180e16844cf9e4f8bf8fe478820a93655342320a29d1f2a48fcc09" => :sierra
+    sha256 "b5770c71438d7a9e6ef8fd07c460281ffefbd21e70250caa44e06da5fd6b3cd8" => :sierra
   end
 
   depends_on "cmake" => :build
