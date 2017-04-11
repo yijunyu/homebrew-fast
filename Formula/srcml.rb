@@ -30,10 +30,7 @@ class Srcml < Formula
     (testpath/"Hello.java").write <<-EOS
 int
     EOS
-
-    do
-      exec "#{bin}/srcml", "Hello.java", "-o", "/dev/null"
-    end
+    exec "#{bin}/srcml", "Hello.java", "-o", "/dev/null"
   end
 end
 __END__
