@@ -14,11 +14,11 @@ class Srcml < Formula
   end
 
   depends_on "cmake" => :build
-  depends_on "LibArchive" => :build
   depends_on "antlr@2" => :build
   depends_on "libantlr3c" => :build
   depends_on "Boost" => :build
   depends_on "libxml2" => :build
+  depends_on "Libarchive"
 
   def install
     system "cmake", ".", *std_cmake_args
