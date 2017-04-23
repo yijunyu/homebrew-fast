@@ -17,7 +17,10 @@ class Fast < Formula
   depends_on "srcml"
 
   def install
-    system "./configure"
+    args = [
+      "--prefix=#{prefix}",
+    ]
+    system "./configure", *args
     system "make"
     system "make", "install"
   end
