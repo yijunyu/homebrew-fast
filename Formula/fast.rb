@@ -11,14 +11,13 @@ class Fast < Formula
     sha256 "bb4aea4874809435686701fb81524e54b95f6ad647f59b36b483748c26ad951a" => :el_capitan
   end
 
-  depends_on "cmake" => :build
   depends_on "flatbuffers" => :build
   depends_on "pkg-config" => :build
   depends_on "protobuf" => :build
   depends_on "srcml"
 
   def install
-    system "configure"
+    system "./configure"
     system "make"
     system "make", "install"
   end
