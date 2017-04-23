@@ -10,14 +10,15 @@ class Srcml < Formula
     cellar :any
     rebuild 1
     sha256 "4ccf28e8a31f43dc80d0eb0b9947db18215803804b590506fd52403f1bc28f9d" => :sierra
+    sha256 "406e548e4cd91f19b67bb764c16adb7b6467bf8fde1a791f5c001fc9a7925ae3" => :el_capitan
   end
 
   depends_on "cmake" => :build
-  depends_on "LibArchive" => :build
   depends_on "antlr@2" => :build
   depends_on "libantlr3c" => :build
-  depends_on "Boost"
-  depends_on "libxml2"
+  depends_on "Boost" => :build
+  depends_on "libxml2" => :build
+  depends_on "Libarchive"
 
   def install
     system "cmake", ".", *std_cmake_args
