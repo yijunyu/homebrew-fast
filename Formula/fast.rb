@@ -18,7 +18,8 @@ class Fast < Formula
   depends_on "srcml"
 
   def install
-    system "cmake", "-G", "Unix Makefiles", *std_cmake_args
+    system "configure"
+    system "make"
     system "make", "install"
   end
 
