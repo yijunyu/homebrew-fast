@@ -2,7 +2,6 @@ class Srcml < Formula
   desc "convert source code to XML"
   homepage "http://www.srcml.org/"
   url "http://sead1.open.ac.uk/srcml/srcml-0.9.5.tar.gz"
-  version "0.9.5"
   sha256 "55dd2115548e270724af4251187343656d2dfda0e7d372fee15ae27262e3fa8e"
 
   bottle do
@@ -16,9 +15,9 @@ class Srcml < Formula
   depends_on "cmake" => :build
   depends_on "antlr@2" => :build
   depends_on "libantlr3c" => :build
-  depends_on "Boost" => :build
+  depends_on "boost" => :build
   depends_on "libxml2" => :build
-  depends_on "Libarchive"
+  depends_on "libarchive"
 
   def install
     system "cmake", ".", *std_cmake_args
