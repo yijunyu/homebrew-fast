@@ -7,18 +7,21 @@ class Fast < Formula
   bottle do
     root_url "https://github.com/yijunyu/fast/releases/download/v0.0.1"
     cellar :any
-    sha256 "" => :sierra
-    sha256 "" => :el_capitan
+    sha256 "532fed2e62afaf4d60674cb51fd6cf8e84b030c2ac7e4f922b0dd25e5fdf3c94" => :sierra
+    sha256 "b54cf0773492ebdd1f91f6ebd020f1484f33f14263a2d65751975c74fdd0f175" => :el_capitan
   end
 
-  depends_on "cmake" => :build
   depends_on "flatbuffers" => :build
   depends_on "pkg-config" => :build
   depends_on "protobuf" => :build
   depends_on "srcml"
 
   def install
-    system "cmake", "-G", "Unix Makefiles", *std_cmake_args
+    args = [
+      "--prefix=#{prefix}",
+    ]
+    system "./configure", *args
+    system "make"
     system "make", "install"
   end
 
