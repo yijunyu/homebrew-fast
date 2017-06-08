@@ -8,7 +8,7 @@ class Fast < Formula
     root_url "https://github.com/yijunyu/fast/releases/download/v0.0.1"
     cellar :any
     sha256 "" => :sierra
-    sha256 "b54cf0773492ebdd1f91f6ebd020f1484f33f14263a2d65751975c74fdd0f175" => :el_capitan
+    sha256 "da724cbb52ada842c1ea96a6db4aa286ea77a8aa88c2b8580500fbe6fcdc7fd5" => :el_capitan
   end
 
   depends_on "flatbuffers" => :build
