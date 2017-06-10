@@ -15,6 +15,7 @@ class Fast < Formula
   depends_on "pkg-config" => :build
   depends_on "protobuf" => :build
   depends_on "srcml"
+  depends_on "libxml2"
 
   def install
     args = [
