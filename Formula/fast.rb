@@ -7,7 +7,7 @@ class Fast < Formula
   bottle do
     root_url "https://github.com/yijunyu/fast/releases/download/v0.0.3"
     cellar :any
-    sha256 "b1c53de13ef11908fcbc2b408c3fd7ae8731b304e5a65eef999dd356761ce978" => :sierra
+    sha256 "" => :sierra
     sha256 "d2f5da15b0d42d76a0d7492d12403e3476b1ff8977b2aae69188172e92d57436" => :el_capitan
   end
 
