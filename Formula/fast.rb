@@ -16,7 +16,7 @@ class Fast < Formula
   depends_on "protobuf" => :build
   depends_on "srcml" => :run
   depends_on "libxml2"
-  depends_on "antlr" => :build
+  depends_on "antlr"
   depends_on "antlr4-cpp-runtime" => :build
   depends_on "lcov"
 
