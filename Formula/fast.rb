@@ -16,6 +16,9 @@ class Fast < Formula
   depends_on "protobuf" => :build
   depends_on "srcml"
   depends_on "libxml2"
+  depends_on "antlr"
+  depends_on "antlr4-cpp-runtime"
+  depends_on "lcov"
 
   def install
     args = [
