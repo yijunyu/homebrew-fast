@@ -14,7 +14,7 @@ class Fast < Formula
   depends_on "flatbuffers" => :build
   depends_on "pkg-config" => :build
   depends_on "protobuf" => :build
-  depends_on "srcml"
+  depends_on "srcml" => :run
   depends_on "libxml2"
   depends_on "antlr"
   depends_on "antlr4-cpp-runtime"
