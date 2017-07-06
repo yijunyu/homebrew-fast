@@ -2,13 +2,13 @@ class Fast < Formula
   desc "Flattening Abstract Syntax Trees"
   homepage "https://github.com/yijunyu/fast"
   url "https://github.com/yijunyu/fast/archive/v0.0.3.tar.gz"
-  sha256 "7e47ddd4d7f14593df8918b3de8f545cc7462fd1d49fe483e88264f72f810d72"
+  sha256 "1e77ab41415d37827738aac32ab28ee756a78befbb9576f0f4b3ef8ca6cac815"
 
   bottle do
     root_url "https://github.com/yijunyu/fast/releases/download/v0.0.3"
     cellar :any
     sha256 "" => :sierra
-    sha256 "d2f5da15b0d42d76a0d7492d12403e3476b1ff8977b2aae69188172e92d57436" => :el_capitan
+    sha256 "1e77ab41415d37827738aac32ab28ee756a78befbb9576f0f4b3ef8ca6cac815" => :el_capitan
   end
 
   depends_on "flatbuffers" => :build
